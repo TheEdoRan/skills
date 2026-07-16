@@ -1,0 +1,174 @@
+<!doctype html>
+<!--
+  explain-implementation walkthrough template.
+  Fill every {{PLACEHOLDER}} and delete this comment:
+    {{TITLE}}    — walkthrough title, plain text
+    {{DATE}}     — YYYY-MM-DD
+    {{PROJECT}}  — repo/project name
+    {{SLUG}}     — topic slug, used as the download filename
+    {{CONTENT}}  — the walkthrough as HTML <section> blocks (see .content notes below)
+    {{MARKDOWN}} — the raw markdown source; escape any literal "</script" as "<\/script"
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f9faf9;
+    --ink: #1f2426;
+    --muted: #5f6b6a;
+    --accent: #0e6e66;
+    --code-bg: #eef1ef;
+    --line: #d8dedc;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14181a;
+      --ink: #e6eae8;
+      --muted: #93a09d;
+      --accent: #3dbdaf;
+      --code-bg: #1d2427;
+      --line: #2a3336;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 17px/1.65 var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* Sticky toolbar: metadata left, actions right */
+  .toolbar {
+    position: sticky; top: 0; z-index: 10;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    padding: 0.6rem 1.25rem;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .toolbar .meta {
+    font: 600 11px/1 var(--mono);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .toolbar .meta b { color: var(--accent); font-weight: 600; }
+  .actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
+  .actions button {
+    appearance: none; -webkit-appearance: none;
+    font: 600 11px/1 var(--mono);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink); background: none;
+    border: 1px solid var(--line); border-radius: 6px;
+    padding: 7px 12px; cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .actions button:hover { color: var(--accent); border-color: var(--accent); }
+  .actions button.done { color: var(--accent); border-color: var(--accent); }
+  @media (prefers-reduced-motion: reduce) { .actions button { transition: none; } }
+
+  main { max-width: 68ch; margin: 0 auto; padding: 3.5rem 1.25rem 5rem; }
+
+  header.title { margin-bottom: 3rem; }
+  header.title .eyebrow {
+    font: 600 12px/1 var(--mono);
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.9rem;
+  }
+  h1 {
+    font: 600 1.7rem/1.3 var(--mono);
+    letter-spacing: -0.01em; margin: 0;
+  }
+
+  /* The walkthrough is a fixed sequence, so sections are numbered */
+  .content { counter-reset: sec; }
+  .content h2 {
+    counter-increment: sec;
+    font: 600 1.05rem/1.4 var(--mono);
+    margin: 3rem 0 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+  .content h2::before {
+    content: counter(sec, decimal-leading-zero) " — ";
+    color: var(--accent);
+  }
+  .content h3 { font: 600 1rem/1.4 var(--mono); margin: 2rem 0 0.6rem; }
+  .content p { margin: 0 0 1rem; }
+  .content ul, .content ol { padding-left: 1.4rem; margin: 0 0 1rem; }
+  .content li { margin-bottom: 0.4rem; }
+  .content sup a { text-decoration: none; font: 600 0.75em var(--mono); }
+  .content :target { scroll-margin-top: 4rem; } /* anchors land below the sticky toolbar */
+  code {
+    font: 0.85em var(--mono);
+    background: var(--code-bg);
+    border-radius: 4px; padding: 0.1em 0.35em;
+  }
+  pre {
+    background: var(--code-bg);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    padding: 1rem 1.2rem; margin: 0 0 1rem;
+    overflow-x: auto;
+  }
+  pre code { background: none; padding: 0; font-size: 0.82rem; line-height: 1.6; }
+  blockquote {
+    margin: 0 0 1rem; padding: 0.2rem 0 0.2rem 1.1rem;
+    border-left: 3px solid var(--line); color: var(--muted);
+  }
+</style>
+</head>
+<body>
+  <div class="toolbar">
+    <div class="meta">Implementation walkthrough · {{DATE}} · <b>{{PROJECT}}</b></div>
+    <div class="actions">
+      <button id="copy-md" type="button">Copy markdown</button>
+      <button id="dl-md" type="button">Download .md</button>
+    </div>
+  </div>
+  <main>
+    <header class="title">
+      <div class="eyebrow">{{PROJECT}}</div>
+      <h1>{{TITLE}}</h1>
+    </header>
+    <div class="content">
+{{CONTENT}}
+    </div>
+  </main>
+
+  <script type="text/markdown" id="md-source">
+{{MARKDOWN}}
+  </script>
+  <script>
+    const md = document.getElementById('md-source').textContent
+      .replace(/<\\\/script/g, '</script').trim() + '\n';
+    const flash = (btn, label) => {
+      const old = btn.textContent;
+      btn.textContent = label; btn.classList.add('done');
+      setTimeout(() => { btn.textContent = old; btn.classList.remove('done'); }, 1500);
+    };
+    document.getElementById('copy-md').addEventListener('click', async (e) => {
+      const btn = e.currentTarget; // null after the await — capture first
+      await navigator.clipboard.writeText(md);
+      flash(btn, 'Copied ✓');
+    });
+    document.getElementById('dl-md').addEventListener('click', (e) => {
+      const url = URL.createObjectURL(new Blob([md], { type: 'text/markdown' }));
+      const a = Object.assign(document.createElement('a'), { href: url, download: '{{SLUG}}.md' });
+      a.click();
+      URL.revokeObjectURL(url);
+      flash(e.currentTarget, 'Saved ✓');
+    });
+  </script>
+</body>
+</html>

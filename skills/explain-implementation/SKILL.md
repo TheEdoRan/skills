@@ -69,11 +69,13 @@ Structure it around decisions, not files:
 2. **How it works** — the key flow, referencing real files as `path:line`.
 3. **Decisions and techniques** — for each non-trivial choice: what it is, why
    this over the alternative, and a verified source for every technical claim
-   about an API, language feature, or documented behavior. Repo-specific
-   rationale ("this matched the existing pattern in X") needs no external
-   source — point to the code instead. Cover `shown` concepts briefly;
-   respect `known` ones unless asked.
-4. **Sources** — a final list of every verified link used above.
+   about an API, language feature, or documented behavior. Cite inline with a
+   numbered footnote marker `[1]` right after the claim; the number matches an
+   entry in the Sources list. Repo-specific rationale ("this matched the
+   existing pattern in X") needs no external source — point to the code
+   instead. Cover `shown` concepts briefly; respect `known` ones unless asked.
+4. **Sources** — a final numbered list where entry N is the verified link for
+   marker `[N]` above.
 
 Ground every claim in either the actual diff/code (cite the location) or a
 verified document (cite the URL). A claim you cannot ground gets labeled
@@ -85,22 +87,30 @@ with today's date.
 
 After delivering the walkthrough in chat, produce a browser-viewable copy:
 
-1. Write the same walkthrough as a **single self-contained HTML file** — all
-   CSS inline, no external scripts, fonts, or images — so it renders offline
-   and can be moved or shared as one file. Author the HTML directly from the
-   walkthrough you just wrote (no pandoc or other converter). Use readable
-   typography: a max-width text column, styled headings and links, monospace
-   code blocks.
-2. Save it to `~/.claude/explain-implementation/walkthroughs/YYYY-MM-DD-<topic-slug>.html`
+1. Copy [references/walkthrough-template.html](references/walkthrough-template.html)
+   and fill in its `{{PLACEHOLDER}}`s (title, date, project, slug, content,
+   markdown source) — the header comment in the template documents each one.
+   Author the `{{CONTENT}}` HTML directly from the walkthrough you just wrote
+   (no pandoc or other converter), as `<section>` blocks with one `<h2>` per
+   walkthrough section — the template numbers them automatically. Do not
+   add external scripts, fonts, or images: the file must stay self-contained
+   and render offline.
+2. The template's toolbar already provides **Copy markdown** and
+   **Download .md** buttons wired to the embedded `{{MARKDOWN}}` source —
+   paste the walkthrough's markdown verbatim there, escaping any literal
+   `</script` as `<\/script`.
+3. Save it to `~/.claude/explain-implementation/walkthroughs/YYYY-MM-DD-<topic-slug>.html`
    (create the directory on first use). The file persists there, so the user
    can re-open, copy, or share it later.
-3. Open it in the default browser: `open <file>` on macOS,
+4. Open it in the default browser: `open <file>` on macOS,
    `xdg-open <file>` on Linux, `start "" <file>` on Windows.
-4. End the chat message with the saved file path so the user knows where the
+5. End the chat message with the saved file path so the user knows where the
    file lives.
 
 Sources in the HTML are the same verified links from the walkthrough — the
-verification protocol applies unchanged.
+verification protocol applies unchanged. Render each footnote marker as
+`<sup><a href="#src-N">[N]</a></sup>` and give the Sources list items matching
+ids (`<li id="src-N">`), so markers click through to the entry at the bottom.
 
 ## Scope guard
 
