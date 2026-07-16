@@ -1,0 +1,14 @@
+{
+  "name": "explain-implementation",
+  "version": "0.1.1",
+  "description": "Post-implementation footer with verified sources for non-obvious techniques, /explain-implementation deep dives, and a personal knowledge memory",
+  "author": {
+    "name": "Edoardo Ranghieri",
+    "email": "edoardo@ranghieri.com"
+  },
+  "repository": "https://github.com/theedoran/skills",
+  "license": "MIT",
+  "keywords": ["learning", "documentation", "citations", "explanations"],
+  "skills": "./skills/",
+  "hooks": "./hooks/hooks.json"
+}
