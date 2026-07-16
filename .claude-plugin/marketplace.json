@@ -1,0 +1,21 @@
+{
+  "name": "theedoran-skills",
+  "description": "Personal skills for Claude Code and Codex.",
+  "owner": {
+    "name": "Edoardo Ranghieri",
+    "email": "edoardo@ranghieri.com"
+  },
+  "plugins": [
+    {
+      "name": "skills",
+      "source": "./",
+      "description": "Personal skills: explain-implementation (decision-oriented walkthroughs) and gcp (logical commits + push).",
+      "license": "MIT",
+      "category": "Productivity",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
+    }
+  ]
+}

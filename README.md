@@ -6,6 +6,28 @@ Every skill in this repo works in both agents. The only difference is how you in
 
 ## Installation
 
+### As a plugin (recommended)
+
+This repo is a plugin marketplace for both agents. Add it once, install the `skills` plugin, and updates flow through the plugin system.
+
+Claude Code:
+
+```
+/plugin marketplace add TheEdoRan/skills
+/plugin install skills@theedoran-skills
+```
+
+Codex:
+
+```
+codex plugin marketplace add TheEdoRan/skills
+codex plugin add skills@theedoran-skills
+```
+
+Start a new session after installing so the bundled skills are picked up.
+
+### As standalone skills
+
 With the [skills CLI](https://github.com/vercel-labs/skills):
 
 ```
@@ -18,8 +40,8 @@ Or manually — clone the repo and copy a skill directory into your agent's skil
 
 ```
 git clone https://github.com/TheEdoRan/skills
-cp -r skills/<skill-name> ~/.claude/skills/   # Claude Code
-cp -r skills/<skill-name> ~/.codex/skills/    # Codex
+cp -r skills/skills/<skill-name> ~/.claude/skills/   # Claude Code
+cp -r skills/skills/<skill-name> ~/.agents/skills/   # Codex
 ```
 
 ## explain-implementation
@@ -34,7 +56,7 @@ A detailed walkthrough of the work the agent just completed in the conversation,
 ### Layout
 
 ```
-explain-implementation/
+skills/explain-implementation/
 ├── SKILL.md                          # the skill itself
 ├── references/source-verification.md
 └── evals/evals.json
@@ -49,7 +71,7 @@ Stages the current changes, creates logical commits — splitting unrelated conc
 ### Layout
 
 ```
-gcp/
+skills/gcp/
 ├── SKILL.md
 └── agents/openai.yaml   # Codex interface metadata
 ```
