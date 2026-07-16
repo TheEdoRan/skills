@@ -9,7 +9,7 @@ Personal plugins and skills for Claude Code and Codex. The repo doubles as a plu
 Add the marketplace once, then install the plugin from it:
 
 ```
-/plugin marketplace add theedoran/skills
+/plugin marketplace add TheEdoRan/skills
 /plugin install explain-implementation@theedoran-skills
 ```
 
@@ -20,7 +20,7 @@ You can also run `/plugin` to browse the marketplace interactively. To update la
 Codex (CLI >= 0.144) uses the same slash commands:
 
 ```
-/plugin marketplace add theedoran/skills
+/plugin marketplace add TheEdoRan/skills
 /plugin install explain-implementation@theedoran-skills
 ```
 
@@ -31,7 +31,7 @@ Run `/plugins` to open the plugin browser, and `/reload-plugins` after installin
 Clone the repo and copy the plugin directory into your plugins folder:
 
 ```
-git clone https://github.com/theedoran/skills
+git clone https://github.com/TheEdoRan/skills
 cp -r skills/explain-implementation ~/.claude/plugins/   # Claude Code
 cp -r skills/explain-implementation ~/.codex/plugins/    # Codex
 ```
