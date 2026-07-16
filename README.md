@@ -8,20 +8,20 @@ Every skill in this repo works in both agents. The only difference is how you in
 
 ### As a plugin (recommended)
 
-This repo is a plugin marketplace for both agents. Add it once, install the `skills` plugin, and updates flow through the plugin system.
+This repo is a plugin marketplace for both agents — each one reads its own native manifest (`.claude-plugin/` for Claude Code, `.agents/plugins/` + `.codex-plugin/` for Codex). Add it once, install the `theedoran` plugin, and updates flow through the plugin system.
 
 Claude Code:
 
 ```
 /plugin marketplace add TheEdoRan/skills
-/plugin install skills@theedoran-skills
+/plugin install theedoran@theedoran-skills
 ```
 
 Codex:
 
 ```
 codex plugin marketplace add TheEdoRan/skills
-codex plugin add skills@theedoran-skills
+codex plugin add theedoran@theedoran-skills
 ```
 
 Start a new session after installing so the bundled skills are picked up.

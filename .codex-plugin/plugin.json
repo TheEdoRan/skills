@@ -8,5 +8,12 @@
   },
   "homepage": "https://github.com/TheEdoRan/skills",
   "repository": "https://github.com/TheEdoRan/skills",
-  "license": "MIT"
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "TheEdoRan's Skills",
+    "shortDescription": "Personal skills for Codex.",
+    "developerName": "Edoardo Ranghieri",
+    "category": "Productivity"
+  }
 }
