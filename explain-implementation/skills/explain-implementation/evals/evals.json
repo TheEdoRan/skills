@@ -26,7 +26,7 @@
       ],
       "assertions": [
         "logger.js has a formatDate(date) returning YYYY-MM-DD and log lines are prefixed with it",
-        "response.md contains NO 📚 footer and no 'Durante questa implementazione'-style teaching block",
+        "response.md contains NO 📚 footer and no 'During this implementation'-style teaching block",
         "No known-concepts.md was created in the project dir"
       ]
     },

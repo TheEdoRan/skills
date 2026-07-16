@@ -1,6 +1,6 @@
 ---
 name: explain-implementation
-description: Use after you finish writing code, or when the user asks about code you just wrote in this conversation. (1) Footer mode — a coding task (feature, fix, refactor) is done and you used something a mid-level dev wouldn't reach for by default (obscure API or hook, deliberate non-idiomatic pattern, trade-off-laden algorithm, little-known documented behavior); append a short footer naming it with a source you actually verified. Also fires when the coding request itself asks you to teach afterwards ("...then explain anything non-obvious you used"), or when a Stop-hook reminder asks. (2) Deep mode — the user wants a walkthrough of your just-completed work (what you built, why, the tricky parts — often before a review or PR), especially when they want real, verified doc links; any language ("spiegami cosa hai fatto", "explain what you implemented", "/explain-implementation"). Also fires when they push back on a footer concept ("questo lo so già" / "I already know this", "rispiegamelo" / "explain it again") — update the knowledge memory accordingly. Not for pre-existing code you didn't write, general concept tutorials, changelogs, or docstrings.
+description: Use after you finish writing code, or when the user asks about code you just wrote in this conversation. (1) Footer mode — a coding task (feature, fix, refactor) is done and you used something a mid-level dev wouldn't reach for by default (obscure API or hook, deliberate non-idiomatic pattern, trade-off-laden algorithm, little-known documented behavior); append a short footer naming it with a source you actually verified. Also fires when the coding request itself asks you to teach afterwards ("...then explain anything non-obvious you used"), or when a Stop-hook reminder asks. (2) Deep mode — the user wants a walkthrough of your just-completed work (what you built, why, the tricky parts — often before a review or PR), especially when they want real, verified doc links; any language ("explain what you implemented", "walk me through what you did", "/explain-implementation"). Also fires when they push back on a footer concept ("I already know this", "explain it again") — update the knowledge memory accordingly. Not for pre-existing code you didn't write, general concept tutorials, changelogs, or docstrings.
 ---
 
 # Explain Implementation
@@ -43,8 +43,8 @@ States:
 - `re-explain` — the user asked to see it again. Treat as unknown; after
   re-explaining, set it back to `shown`.
 
-Maintenance: when the user says they already know a concept ("questo lo so
-già", "I know this"), update its line to `known` (add the line if missing).
+Maintenance: when the user says they already know a concept ("I know this",
+"I already know that"), update its line to `known` (add the line if missing).
 When they ask to have something re-explained, set it to `re-explain`. Create
 the file and parent directory on first use. Keep slugs kebab-case and stable
 so the same concept always matches.
@@ -90,7 +90,7 @@ triggered you or a Stop-hook reminder asked for it.
 
    ```
    ---
-   📚 Durante questa implementazione:
+   📚 During this implementation:
    - **useSyncExternalStore** — subscribing to an external store without
      tearing during concurrent rendering. ([React docs](https://react.dev/reference/react/useSyncExternalStore))
    ```

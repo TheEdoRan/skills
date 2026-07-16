@@ -30,7 +30,7 @@ def run(entries, stop_active=False, transcript=True):
 user = {"type": "user", "message": {"content": "add a feature"}}
 edit = {"type": "assistant", "message": {"content": [{"type": "tool_use", "name": "Edit", "input": {}}]}}
 text = {"type": "assistant", "message": {"content": [{"type": "text", "text": "done"}]}}
-footer = {"type": "assistant", "message": {"content": [{"type": "text", "text": "---\n\U0001F4DA Durante questa implementazione: ..."}]}}
+footer = {"type": "assistant", "message": {"content": [{"type": "text", "text": "---\n\U0001F4DA During this implementation: ..."}]}}
 toolres = {"type": "user", "message": {"content": [{"type": "tool_result", "content": "ok"}]}}
 
 assert "additionalContext" in run([user, edit, text])          # edits -> reminder
