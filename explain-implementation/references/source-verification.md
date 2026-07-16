@@ -44,6 +44,6 @@ session.**
 
 ## Cost control
 
-Verification runs once per cited concept, not per sentence. In footer mode
-that is at most 2 lookups; batch them. If a lookup takes more than a couple of
+Verification runs once per cited concept, not per sentence. Batch the
+lookups. If a lookup takes more than a couple of
 attempts, fall back to rule 3 instead of burning the session's budget.

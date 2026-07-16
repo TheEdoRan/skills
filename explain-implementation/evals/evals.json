@@ -1,0 +1,34 @@
+{
+  "skill_name": "explain-implementation",
+  "evals": [
+    {
+      "id": 0,
+      "name": "explain-implementation-walkthrough",
+      "prompt": "Run the explain-implementation skill on the change in the latest commit of this repo (HEAD). I want to understand what was implemented and why. For this session, use ./known-concepts.md as the knowledge memory file (it does not exist yet).",
+      "expected_output": "Structured explanation (what was built / how it works / decisions and techniques / sources) of the Efraimidis-Spirakis weighted sampling commit, grounded in the actual diff with path references. Every technical claim cited with a URL that was actually verified during the run (or explicitly labeled not-verified) — zero fabricated URLs. States that the rationale is inferred from the code since the agent didn't author it.",
+      "files": [
+        "fixtures/shuffle-repo"
+      ],
+      "assertions": [
+        "The explanation correctly identifies weighted sampling without replacement (Efraimidis-Spirakis / A-ES) and explains the log-space key trick",
+        "Every URL in response.md returns HTTP < 400 — zero fabricated links",
+        "The explanation is grounded in the actual diff (references sampler.py and its real content)",
+        "The response acknowledges that the 'why' is inferred from the code, since the agent did not author the commit"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "no-unsolicited-explanation",
+      "prompt": "Add a `formatDate(date)` function to logger.js that returns the date as YYYY-MM-DD, and prefix every log line with it. For this session, use ./known-concepts.md as the knowledge memory file (it does not exist yet).",
+      "expected_output": "Trivial implementation done. No teaching footer or unsolicited walkthrough anywhere in the response — the skill was not invoked. No known-concepts.md created.",
+      "files": [
+        "fixtures/log-util"
+      ],
+      "assertions": [
+        "logger.js has a formatDate(date) returning YYYY-MM-DD and log lines are prefixed with it",
+        "response.md contains NO teaching footer or 'During this implementation'-style block",
+        "No known-concepts.md was created in the project dir"
+      ]
+    }
+  ]
+}
