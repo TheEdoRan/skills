@@ -1,0 +1,6 @@
+interface:
+  display_name: "Git Commit and Push"
+  short_description: "Create logical commits and push the current branch"
+  default_prompt: "Use $gcp to create logical commits from the current changes, push the current branch, and verify the result."
+policy:
+  allow_implicit_invocation: false

@@ -28,6 +28,27 @@ explain-implementation/
 └── evals/evals.json
 ```
 
+## gcp
+
+A `/gcp` (Claude Code) / `$gcp` (Codex) command: stage the current changes, create logical commits — splitting unrelated concerns into separate commits — push the current branch, and verify the result. Commit messages follow the style of recent commits in the repo. Any text passed with the invocation is used as guidance for commit messages or grouping. It never amends, force-pushes, resets, or changes branches.
+
+The skill ships in two harness-specific variants (Claude Code supports embedded `!` command blocks and `$ARGUMENTS`; Codex does not), so copy the matching subdirectory:
+
+```
+cp -r skills/gcp/claude ~/.claude/skills/gcp   # Claude Code
+cp -r skills/gcp/codex ~/.codex/skills/gcp     # Codex
+```
+
+### Layout
+
+```
+gcp/
+├── claude/SKILL.md          # Claude Code variant
+└── codex/
+    ├── SKILL.md             # Codex variant
+    └── agents/openai.yaml
+```
+
 ## License
 
 MIT
