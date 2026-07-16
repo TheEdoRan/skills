@@ -1,6 +1,6 @@
 ---
 name: explain-implementation
-description: Use ONLY when the user explicitly asks for a walkthrough of code you just wrote in this conversation — "/explain-implementation", "explain what you implemented", "walk me through what you did", in any language. Produces a decision-oriented explanation with verified doc links and a personal knowledge memory so nothing is re-taught. NEVER trigger on your own after finishing a coding task; not for general concept tutorials, changelogs, or docstrings.
+description: Explains a completed implementation as a decision-oriented walkthrough of what changed, how it works with file:line references, and why key choices were made. Uses session-verified documentation and a persistent knowledge memory to avoid repeating known concepts. Invoke only when the user explicitly requests `/explain-implementation` or asks to explain or walk through an implementation; do not use for unsolicited post-task summaries, general concept tutorials, changelogs, or docstrings.
 ---
 
 # Explain Implementation
