@@ -1,6 +1,8 @@
 ---
 name: gcp
-description: Stage changed files, create logical commits, split unrelated concerns into separate commits, push the current branch, and verify the result. Use only when the user explicitly invokes $gcp or asks to run the GCP git workflow; accept any accompanying text as optional commit-message guidance.
+description: Stage changed files, create logical commits, split unrelated concerns into separate commits, push the current branch, and verify the result. Use only when the user explicitly invokes /gcp or $gcp or asks to run the GCP git workflow; accept any accompanying text as optional commit-message guidance.
+disable-model-invocation: true
+argument-hint: "[optional: guidance for commit messages]"
 ---
 
 # Git Workflow: Stage, Commit, and Push
@@ -25,3 +27,5 @@ Run the following workflow in the current repository.
 7. Verify the push succeeded. Report the created commit or commits and show the final `git status --short --branch` and `git log --oneline -5`.
 
 Never amend, force-push, reset, discard changes, bypass hooks, or change branches unless the user explicitly asks.
+
+$ARGUMENTS
