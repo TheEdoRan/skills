@@ -81,6 +81,27 @@ verified document (cite the URL). A claim you cannot ground gets labeled
 the walkthrough, record newly explained concepts in the memory as `shown`
 with today's date.
 
+## Browser view
+
+After delivering the walkthrough in chat, produce a browser-viewable copy:
+
+1. Write the same walkthrough as a **single self-contained HTML file** — all
+   CSS inline, no external scripts, fonts, or images — so it renders offline
+   and can be moved or shared as one file. Author the HTML directly from the
+   walkthrough you just wrote (no pandoc or other converter). Use readable
+   typography: a max-width text column, styled headings and links, monospace
+   code blocks.
+2. Save it to `~/.claude/explain-implementation/walkthroughs/YYYY-MM-DD-<topic-slug>.html`
+   (create the directory on first use). The file persists there, so the user
+   can re-open, copy, or share it later.
+3. Open it in the default browser: `open <file>` on macOS,
+   `xdg-open <file>` on Linux, `start "" <file>` on Windows.
+4. End the chat message with the saved file path so the user knows where the
+   file lives.
+
+Sources in the HTML are the same verified links from the walkthrough — the
+verification protocol applies unchanged.
+
 ## Scope guard
 
 This skill explains work done in this conversation by the agent, on explicit
