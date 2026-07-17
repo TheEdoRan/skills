@@ -1,7 +1,7 @@
 {
   "name": "theedoran",
   "version": "1.0.0",
-  "description": "Personal skills: explain-implementation (decision-oriented walkthroughs) and gcp (logical commits + push).",
+  "description": "Personal skills: analyze (implementation review with TDD hardening), explain-implementation (decision-oriented walkthroughs), and gcp (logical commits + push).",
   "author": {
     "name": "Edoardo Ranghieri",
     "email": "edoardo@ranghieri.com"
