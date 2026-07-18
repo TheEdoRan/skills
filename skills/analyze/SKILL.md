@@ -1,15 +1,21 @@
 ---
 name: analyze
-description: Analyzes the implementation of a feature (or the work just completed in the conversation) across security, performance, maintainability, edge cases, and test coverage, then hardens it test-first. Verifies security and library best practices against current documentation via Context7. Invoke only when the user explicitly requests `/analyze` or `$analyze`, optionally naming the feature, paths, or diff to analyze.
+description: Read-only analysis of a feature's implementation (or the work just completed in the conversation) across security, performance, maintainability, and edge cases. Writes findings to a markdown report file for the user to act on; changes no code. Verifies security and library best practices against current documentation via Context7. Invoke only when the user explicitly requests `/analyze` or `$analyze`, optionally naming the feature, paths, or diff to analyze.
 disable-model-invocation: true
 argument-hint: "[optional: feature, paths, or diff to analyze]"
 ---
 
 # Analyze Implementation
 
-Review an implementation across five dimensions — security, performance,
-maintainability, edge cases, tests — and harden it test-first. Security is the
+Review an implementation across four dimensions — security, performance,
+maintainability, edge cases — and report the findings. Security is the
 highest-priority dimension: never skip it, never shorten it.
+
+**This skill is strictly read-only.** It never edits, creates, or deletes any
+project file. The only file it writes is the report described at the end. The
+user decides what to do with the findings — do not fix anything, do not offer
+to fix anything mid-analysis. (The `analyze-fix` skill exists for when the
+user wants the fixes applied.)
 
 ## Scope
 
@@ -34,9 +40,7 @@ checked. Subagents must not edit anything; they explore and report back.
 
 When all subagents return, the main agent merges the reports: dedupe
 overlapping findings, drop anything not grounded in real code, and verify
-each surviving finding against the source before acting on it. The merged
-list of things to change drives the TDD hardening step; the main agent — not
-the subagents — applies every change.
+each surviving finding against the source before including it in the report.
 
 If the environment cannot run subagents, do the same exploration inline,
 dimension by dimension, security first.
@@ -89,39 +93,30 @@ empty/null/missing input, boundary values (0, -1, max, off-by-one), malformed
 or hostile input, unicode and encoding, concurrent access and re-entrancy,
 partial failure of external calls (timeout, 5xx, disconnect mid-write),
 clock/timezone issues, filesystem oddities (missing dirs, permissions,
-symlinks). For each real gap, decide the correct behavior — that decision
-becomes a test in the next step.
-
-## 5. TDD hardening
-
-For every confirmed defect and every unhandled edge case with local, clearly
-correct behavior:
-
-1. Write a test in the repo's existing test framework and style that captures
-   the correct behavior. Run it and confirm it FAILS against the current code.
-2. Apply the minimal fix. Confirm the test passes.
-3. Run the full test suite for the affected area and confirm nothing broke.
-
-Never write the fix before the failing test. A finding without a failing test
-is a hypothesis, not a defect — verify it before fixing it.
-
-Do NOT auto-fix findings that require design decisions, public API changes,
-schema migrations, or new dependencies. Report those as recommendations with
-a suggested approach and leave the code untouched.
+symlinks). For each real gap, state what the correct behavior should be —
+that goes in the report as the suggested fix.
 
 ## Report
 
-End with a report the user can act on:
+Write the full report to `analyze-report.md` at the root of the analyzed
+repository (overwriting any previous run). Structure it so the user can hand
+it straight back to an agent as a plan or fix prompt:
 
-1. **Fixed** — each finding fixed, with severity, `file:line`, and the test
-   that now guards it.
-2. **Recommended, not applied** — findings needing a user decision, with the
-   suggested approach and why it wasn't auto-applied.
+1. **Scope** — what was analyzed (feature, paths, commit) and when.
+2. **Findings** — ordered by severity, security first. Each finding:
+   severity, `file:line`, what is wrong, why it matters, and a concrete
+   suggested fix (including the test that should guard it, where applicable).
+   Flag findings that need a design decision, public API change, schema
+   migration, or new dependency as such.
 3. **Checked, no issues** — one line per dimension confirming what was
    examined and found sound, including which library docs were verified via
    Context7.
 
-Order findings by severity (security first). Every claim points at real code
-(`file:line`) or a doc verified this session — no unverified assertions.
+Every claim points at real code (`file:line`) or a doc verified this session
+— no unverified assertions.
+
+In the conversation, give the user only a short summary: finding count per
+severity, the single most important finding, and the path to
+`analyze-report.md`. Then stop — apply nothing.
 
 $ARGUMENTS

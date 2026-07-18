@@ -1,0 +1,6 @@
+interface:
+  display_name: "Analyze and Fix Implementation"
+  short_description: "Review an implementation for security, performance, maintainability, and edge cases, then harden it with tests"
+  default_prompt: "Use $analyze-fix to review the implementation across security, performance, maintainability, and edge cases, and harden it test-first."
+policy:
+  allow_implicit_invocation: false
