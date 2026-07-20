@@ -1,11 +1,11 @@
 ---
-name: analyze
-description: Read-only analysis of a feature's implementation (or the work just completed in the conversation) across security, performance, maintainability, and edge cases. Writes findings to a markdown report file for the user to act on; changes no code. Verifies security and library best practices against current documentation via Context7. Invoke only when the user explicitly requests `/analyze` or `$analyze`, optionally naming the feature, paths, or diff to analyze.
+name: explain
+description: Read-only analysis of a feature's implementation (or the work just completed in the conversation) across security, performance, maintainability, and edge cases. Writes findings to a markdown report file for the user to act on; changes no code. Verifies security and library best practices against current documentation via Context7. Invoke only when the user explicitly requests `/explain` or `$explain`, optionally naming the feature, paths, or diff to analyze.
 disable-model-invocation: true
 argument-hint: "[optional: feature, paths, or diff to analyze]"
 ---
 
-# Analyze Implementation
+# Explain Implementation
 
 Review an implementation across four dimensions — security, performance,
 maintainability, edge cases — and report the findings. Security is the
@@ -14,7 +14,7 @@ highest-priority dimension: never skip it, never shorten it.
 **This skill is strictly read-only.** It never edits, creates, or deletes any
 project file. The only file it writes is the report described at the end. The
 user decides what to do with the findings — do not fix anything, do not offer
-to fix anything mid-analysis. (The `analyze-fix` skill exists for when the
+to fix anything mid-analysis. (The `explain-fix` skill exists for when the
 user wants the fixes applied.)
 
 ## Scope
@@ -98,7 +98,7 @@ that goes in the report as the suggested fix.
 
 ## Report
 
-Write the full report to `analyze-report.md` at the root of the analyzed
+Write the full report to `explain-report.md` at the root of the analyzed
 repository (overwriting any previous run). Structure it so the user can hand
 it straight back to an agent as a plan or fix prompt:
 
@@ -117,6 +117,6 @@ Every claim points at real code (`file:line`) or a doc verified this session
 
 In the conversation, give the user only a short summary: finding count per
 severity, the single most important finding, and the path to
-`analyze-report.md`. Then stop — apply nothing.
+`explain-report.md`. Then stop — apply nothing.
 
 $ARGUMENTS

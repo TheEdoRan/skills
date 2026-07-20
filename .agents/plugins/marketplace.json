@@ -9,7 +9,7 @@
     {
       "name": "theedoran",
       "source": "./",
-      "description": "Personal skills: analyze (read-only implementation review reported to markdown), analyze-fix (review + TDD hardening), explain-implementation (decision-oriented walkthroughs), and gcp (logical commits + push).",
+      "description": "Personal skills: explain (read-only implementation review reported to markdown), explain-fix (review + TDD hardening), explain-implementation (decision-oriented walkthroughs), and gcp (logical commits + push).",
       "license": "MIT",
       "category": "Productivity",
       "policy": {

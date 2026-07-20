@@ -1,19 +1,19 @@
 ---
-name: analyze-fix
-description: Analyzes the implementation of a feature (or the work just completed in the conversation) across security, performance, maintainability, and edge cases, then hardens it test-first — same analysis as the `analyze` skill, but the fixes are applied instead of left to the user. Invoke only when the user explicitly requests `/analyze-fix` or `$analyze-fix`, optionally naming the feature, paths, or diff to analyze.
+name: explain-fix
+description: Analyzes the implementation of a feature (or the work just completed in the conversation) across security, performance, maintainability, and edge cases, then hardens it test-first — same analysis as the `explain` skill, but the fixes are applied instead of left to the user. Invoke only when the user explicitly requests `/explain-fix` or `$explain-fix`, optionally naming the feature, paths, or diff to analyze.
 disable-model-invocation: true
 argument-hint: "[optional: feature, paths, or diff to analyze]"
 ---
 
-# Analyze and Fix Implementation
+# Explain and Fix Implementation
 
 Two phases: analyze, then fix.
 
-## Phase 1: Analyze
+## Phase 1: Explain
 
-Read `../analyze/SKILL.md` (relative to this skill's directory) and follow it
+Read `../explain/SKILL.md` (relative to this skill's directory) and follow it
 end to end — same scope resolution, same parallel subagent exploration, same
-four dimensions with security first, same `analyze-report.md` written to the
+four dimensions with security first, same `explain-report.md` written to the
 repo root. Its read-only rule applies to this phase only: once the report is
 written, continue below instead of stopping.
 
@@ -36,7 +36,7 @@ a suggested approach and leave the code untouched.
 
 ## Report
 
-Update `analyze-report.md` so each finding is marked **fixed** (with the test
+Update `explain-report.md` so each finding is marked **fixed** (with the test
 that now guards it) or **recommended, not applied** (with why). Then end with
 a short summary in the conversation:
 
@@ -44,6 +44,6 @@ a short summary in the conversation:
    that now guards it.
 2. **Recommended, not applied** — findings needing a user decision, with the
    suggested approach.
-3. Path to the updated `analyze-report.md`.
+3. Path to the updated `explain-report.md`.
 
 $ARGUMENTS

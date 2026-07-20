@@ -47,11 +47,11 @@ cp -r skills/skills/<skill-name> ~/.agents/skills/   # Codex
 ## Skills
 
 <details>
-<summary><b>analyze</b> — read-only implementation review reported to a markdown file</summary>
+<summary><b>explain</b> — read-only implementation review reported to a markdown file</summary>
 
-Invoke with `/analyze` (Claude Code) or `$analyze` (Codex), optionally followed by the feature, paths, or diff to analyze; with no arguments it targets the implementation just completed in the conversation.
+Invoke with `/explain` (Claude Code) or `$explain` (Codex), optionally followed by the feature, paths, or diff to analyze; with no arguments it targets the implementation just completed in the conversation.
 
-Reviews an implementation across four dimensions — security (highest priority), performance, maintainability, and edge cases — and changes no code. Each dimension is explored by a read-only subagent, all running in parallel; the main agent merges and verifies the findings and writes them to `analyze-report.md` at the repo root. You then reference that file to write a plan or a fix prompt yourself — or run `analyze-fix` to have the fixes applied.
+Reviews an implementation across four dimensions — security (highest priority), performance, maintainability, and edge cases — and changes no code. Each dimension is explored by a read-only subagent, all running in parallel; the main agent merges and verifies the findings and writes them to `explain-report.md` at the repo root. You then reference that file to write a plan or a fix prompt yourself — or run `explain-fix` to have the fixes applied.
 
 - **Security first**: trust boundaries, injection, authn/authz, secrets, and crypto misuse are always checked, and library usage is verified against current documentation via Context7 rather than recalled from memory.
 - **Actionable report**: findings ordered by severity with `file:line` references and a concrete suggested fix each, plus a checked-with-no-issues section per dimension.
@@ -59,11 +59,11 @@ Reviews an implementation across four dimensions — security (highest priority)
 </details>
 
 <details>
-<summary><b>analyze-fix</b> — the analyze review plus test-first hardening</summary>
+<summary><b>explain-fix</b> — the explain review plus test-first hardening</summary>
 
-Invoke with `/analyze-fix` (Claude Code) or `$analyze-fix` (Codex), with the same optional arguments as `analyze`.
+Invoke with `/explain-fix` (Claude Code) or `$explain-fix` (Codex), with the same optional arguments as `explain`.
 
-Runs the full `analyze` review (including the `analyze-report.md` report), then hardens the code test-first: every confirmed defect and unhandled edge case gets a failing test before the minimal fix, and the affected test suite is re-run afterwards. Findings that would need design decisions, API changes, schema migrations, or new dependencies are reported as recommendations instead of auto-applied, and the report is updated to mark each finding fixed or recommended.
+Runs the full `explain` review (including the `explain-report.md` report), then hardens the code test-first: every confirmed defect and unhandled edge case gets a failing test before the minimal fix, and the affected test suite is re-run afterwards. Findings that would need design decisions, API changes, schema migrations, or new dependencies are reported as recommendations instead of auto-applied, and the report is updated to mark each finding fixed or recommended.
 
 </details>
 

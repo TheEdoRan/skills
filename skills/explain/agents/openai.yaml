@@ -1,0 +1,6 @@
+interface:
+  display_name: "Explain Implementation"
+  short_description: "Read-only review of an implementation for security, performance, maintainability, and edge cases, reported to a markdown file"
+  default_prompt: "Use $explain to review the implementation across security, performance, maintainability, and edge cases, and write the findings to a markdown report."
+policy:
+  allow_implicit_invocation: false
