@@ -75,7 +75,7 @@ Invoke with `/explain-implementation` (Claude Code) or `$explain-implementation`
 A detailed walkthrough of the work the agent just completed in the conversation, organized around decisions rather than files — what was built, how it works (with `file:line` references), why each non-trivial choice was made. It only runs when you ask for it; nothing is appended automatically.
 
 - **Verified sources**: every cited link is resolved in the current session (Context7 first, then WebFetch/WebSearch) and cited inline with numbered footnotes. No URLs recalled from memory: if verification fails, the source is named without a link instead of fabricating one.
-- **Personal knowledge memory**: `~/.claude/explain-implementation/known-concepts.md` tracks concepts already shown or declared known, so the same things are never re-explained. Shared across projects and across agents. Saying "I already know this" marks a concept as known; "explain it again" puts it back in the queue.
+- **Personal knowledge memory**: `known-concepts.md` tracks concepts already shown or declared known, so the same things are never re-explained. It is stored under `~/.claude/explain-implementation/` for Claude Code or `~/.codex/explain-implementation/` for Codex, and shared only across projects that use the same agent. Saying "I already know this" marks a concept as known; "explain it again" puts it back in the queue.
 - **Browser view**: each walkthrough is also saved as a self-contained HTML page and opened in the browser, with copy/download buttons for the markdown source.
 
 </details>

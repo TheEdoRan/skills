@@ -1,6 +1,7 @@
 ---
 name: explain-implementation
-description: Explains a completed implementation as a decision-oriented walkthrough of what changed, how it works with file:line references, and why key choices were made. Uses session-verified documentation and a persistent knowledge memory to avoid repeating known concepts. Invoke only when the user explicitly requests `/explain-implementation` or asks to explain or walk through an implementation; do not use for unsolicited post-task summaries, general concept tutorials, changelogs, or docstrings.
+description: Explains a completed implementation as a decision-oriented walkthrough of what changed, how it works with file:line references, and why key choices were made. Uses session-verified documentation and a persistent knowledge memory to avoid repeating known concepts. Invoke only when the user explicitly enters `/explain-implementation` in Claude Code or `$explain-implementation` in Codex. Do not invoke for natural-language requests to explain or walk through code, unsolicited post-task summaries, general concept tutorials, changelogs, or docstrings.
+disable-model-invocation: true
 ---
 
 # Explain Implementation
@@ -21,8 +22,15 @@ user has already seen or knows).
 
 ## The knowledge memory
 
-Path: `~/.claude/explain-implementation/known-concepts.md` (shared across
-projects and across agents — Codex uses the same file).
+Keep data in the current agent's configuration directory:
+
+- Claude Code: `$CLAUDE_CONFIG_DIR/explain-implementation/` when
+  `CLAUDE_CONFIG_DIR` is set, otherwise `~/.claude/explain-implementation/`
+- Codex: `$CODEX_HOME/explain-implementation/` when `CODEX_HOME` is set,
+  otherwise `~/.codex/explain-implementation/`
+
+The knowledge memory is `known-concepts.md` in that directory. It is shared
+across projects that use the same agent, but it is not shared across agents.
 
 Format — one line per concept:
 
@@ -99,7 +107,8 @@ After delivering the walkthrough in chat, produce a browser-viewable copy:
    **Download .md** buttons wired to the embedded `{{MARKDOWN}}` source —
    paste the walkthrough's markdown verbatim there, escaping any literal
    `</script` as `<\/script`.
-3. Save it to `~/.claude/explain-implementation/walkthroughs/YYYY-MM-DD-<topic-slug>.html`
+3. Save it to `walkthroughs/YYYY-MM-DD-<topic-slug>.html` inside the current
+   agent's explain-implementation data directory defined above
    (create the directory on first use). The file persists there, so the user
    can re-open, copy, or share it later.
 4. Open it in the default browser: `open <file>` on macOS,

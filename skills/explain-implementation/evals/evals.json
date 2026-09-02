@@ -4,7 +4,7 @@
     {
       "id": 0,
       "name": "explain-implementation-walkthrough",
-      "prompt": "Run the explain-implementation skill on the change in the latest commit of this repo (HEAD). I want to understand what was implemented and why. For this session, use ./known-concepts.md as the knowledge memory file (it does not exist yet).",
+      "prompt": "$explain-implementation Explain the change in the latest commit of this repo (HEAD). I want to understand what was implemented and why. For this session, use ./known-concepts.md as the knowledge memory file (it does not exist yet).",
       "expected_output": "Structured explanation (what was built / how it works / decisions and techniques / sources) of the Efraimidis-Spirakis weighted sampling commit, grounded in the actual diff with path references. Every technical claim cited with a URL that was actually verified during the run (or explicitly labeled not-verified) — zero fabricated URLs. States that the rationale is inferred from the code since the agent didn't author it.",
       "files": [
         "fixtures/shuffle-repo"

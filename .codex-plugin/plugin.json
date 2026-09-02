@@ -1,6 +1,6 @@
 {
   "name": "theedoran",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Personal skills: explain (read-only implementation review reported to markdown), explain-fix (review + TDD hardening), explain-implementation (decision-oriented walkthroughs), and gcp (logical commits + push).",
   "author": {
     "name": "Edoardo Ranghieri",
