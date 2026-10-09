@@ -89,6 +89,15 @@ Stages the current changes, creates logical commits — splitting unrelated conc
 
 </details>
 
+<details>
+<summary><b>use-subagents</b>: run a task through parallel subagents, each with its own model and effort</summary>
+
+Invoke with `/use-subagents` (Claude Code) or `$use-subagents` (Codex), optionally followed by the task or tasks to run; with no arguments it targets the task in progress in the conversation.
+
+Splits the work into independent and dependent units, then runs them through as many subagents as the work warrants, in parallel where possible. Each subagent gets its own model and reasoning effort, picked for that unit alone: small and fast models for searches and mechanical work, balanced ones for well-specified implementation, the strongest available for planning, hard debugging, security, and verification. The main agent shows the dispatch plan, then merges and verifies every result before reporting.
+
+</details>
+
 ## License
 
 MIT
